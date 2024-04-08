@@ -1,13 +1,15 @@
-import React from 'react'
-import {Stack, Button } from '@mui/material';
+import {Routes, Route} from 'react-router-dom'
+import { Box } from '@mui/material';
+import {Main, Channel} from '../'
 
 const App = () => {
   return (
-   <Stack spacing={2} direction="row">
-      <Button variant="text">Text</Button>
-      <Button variant="contained">Contained</Button>
-      <Button variant="outlined">Outlined</Button>
-    </Stack>
+   <Box>
+    <Routes>
+      <Route  path='/' element={<Main />}  />
+      <Route  path='/channel' element={<Channel />}  />
+    </Routes>
+   </Box>
   )
 }
 

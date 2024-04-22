@@ -1,15 +1,22 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { Box, Container, Stack, Typography } from '@mui/material';
-import {Category} from '../'
+import {Category, Videos} from '../'
 import { category } from '../../constants';
+import { ApiService } from '../../service/api.service'
 
 const Main = () => {
   const [selectCategory, setSelectCategory] = useState('New') 
+  const [videos, setVideos] = useState([])
   
   const selectCategoryHandeler = (category) =>  {
     setSelectCategory(category)
-
   }
+
+  useEffect(() => {
+    ApiService.fetching('search').then(data => setVideos(data))
+  })
+
+  console.log(process.env.REACT_APP_PUBLIC_API_KEY);
   return (
     <Stack >
        <Category 
@@ -21,6 +28,9 @@ const Main = () => {
             <Typography variant={'h4'} fontWeight={'bold'} mb={2}>
               {selectCategory} <span>videos</span>
             </Typography>
+            
+            <Videos />
+            {/* {videos.items.map(c => c.kind)} */}
           </Container>
        </Box>
     </Stack>
